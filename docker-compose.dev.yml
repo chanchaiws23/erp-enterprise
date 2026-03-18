@@ -1,0 +1,30 @@
+version: '3.8'
+
+# Development overrides — run with:
+# docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+services:
+  db:
+    ports:
+      - "5432:5432"
+
+  server:
+    build: ./server
+    volumes:
+      - ./server/src:/app/src    # Hot reload
+    command: node --watch src/index.js
+    environment:
+      NODE_ENV: development
+      LOG_LEVEL: debug
+
+  # In dev, use Vite dev server instead of nginx
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client/src:/app/src    # Hot reload
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
