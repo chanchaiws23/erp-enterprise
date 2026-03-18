@@ -1,0 +1,21 @@
+{
+  "name": "erp-enterprise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise Resource Planning System - Full Stack Monorepo",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "lint": "npm run lint --prefix client && npm run lint --prefix server",
+    "test": "npm run test --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
