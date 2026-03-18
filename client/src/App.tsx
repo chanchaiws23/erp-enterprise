@@ -12,11 +12,11 @@ import FinancePage from './pages/FinancePage';
 import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   if (loading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>;
   if (!user) return <Navigate to="/login" />;
-  return children;
+  return <>{children}</>;
 }
 
 function AppRoutes() {
